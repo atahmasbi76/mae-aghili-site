@@ -10,5 +10,7 @@ Astro static site. All text, offices and links live in `src/data/site.ts`.
 ## Before launch
 - Replace the photo placeholders (hero blob, about photos) with real photos in `public/`.
 
-## Deploy (Cloudflare Pages)
-Connect the GitHub repo in Cloudflare Pages. Build command `npm run build`, output folder `dist`.
+## Deploy (Cloudflare Workers)
+The `mae-aghili-site` Worker in Cloudflare is connected to this repo. Every push to `main`
+runs `npm run build` and then `npx wrangler deploy`, which serves `dist/` as static
+assets (see `wrangler.jsonc`). Live at https://maeaghili.com and https://www.maeaghili.com.
