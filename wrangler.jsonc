@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers static site: serves the Astro build output in dist/.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mae-aghili-site",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
