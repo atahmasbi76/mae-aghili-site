@@ -1,0 +1,36 @@
+---
+// Draft-only tool for comparing color directions. Turn off with site.showPalettePicker = false.
+const palettes = [
+  { id: "orchid", name: "Orchid & Sage", colors: ["#2f2233", "#8e5a86", "#8ea596"] },
+  { id: "plum", name: "Plum & Champagne", colors: ["#3b1f3a", "#6e3a63", "#b8955f"] },
+  { id: "rose", name: "Rose & Slate", colors: ["#26303d", "#b46f80", "#56708c"] },
+];
+---
+<aside class="picker" aria-label="Try a color direction">
+  <p class="picker-title">Draft · color direction</p>
+  <div class="picker-row">
+    {palettes.map((p) => (
+      <button type="button" class="picker-btn" data-set-palette={p.id} id={`palette-${p.id}`}>
+        <span class="swatch" aria-hidden="true">{p.colors.map((c) => <i style={`background:${c}`}></i>)}</span>
+        <span class="picker-name">{p.name}</span>
+      </button>
+    ))}
+  </div>
+</aside>
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    var btns = document.querySelectorAll("[data-set-palette]");
+    var ids = Array.prototype.map.call(btns, function (b) { return b.dataset.setPalette; });
+    function apply(id) {
+      if (ids.indexOf(id) < 0) id = ids[0];
+      root.setAttribute("data-palette", id);
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setPalette === id)); });
+      try { localStorage.setItem("mae-palette-v2", id); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("mae-palette-v2"); } catch (e) {}
+    apply(saved || root.getAttribute("data-palette") || "orchid");
+    btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.setPalette); }); });
+  })();
+</script>
