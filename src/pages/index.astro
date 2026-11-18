@@ -1,0 +1,172 @@
+---
+import Base from "../layouts/Base.astro";
+import Logo from "../components/Logo.astro";
+import InstagramFeed from "../components/InstagramFeed.astro";
+import { site, offices, bio, promises, usc, photos } from "../data/site";
+
+const mapUrl = (o) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.street}, ${o.cityLine}`)}`;
+const year = new Date().getFullYear();
+---
+<Base>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#top" class="topbar-logo" aria-label="Mae Aghili, DDS, home"><Logo /></a>
+      <nav class="topnav" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#offices">Offices</a>
+        <a href="#instagram">Instagram</a>
+        <a class="btn btn-small" href="#offices">Book a visit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Board-certified pediatric dentist · Los Angeles</p>
+          <h1>Gentle care for <em>growing smiles.</em></h1>
+          <p class="lede">
+            Dr. Mae Aghili makes the dentist something children look forward to, and something parents can trust.
+            She sees families in Culver City and West Los Angeles.
+          </p>
+          <div class="cta-row">
+            <a class="btn" href="#offices">Find an office</a>
+            <a class="text-link" href="#about">Meet Dr. Mae <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="hero-points">
+            <li><span>Diplomate</span>American Board of Pediatric Dentistry</li>
+            <li><span>USC Trojan</span>Past President, USC Pediatric Dentistry Alumni</li>
+            <li><span>Infants to teens</span>First tooth through braces</li>
+          </ul>
+        </div>
+        <figure class="hero-art">
+          <div class="arch arch-hero">
+            {photos.hero.src
+              ? <img src={photos.hero.src} alt={photos.hero.alt} style={`object-position:${photos.hero.position}`} width="1000" height="1000" fetchpriority="high" />
+              : <span class="ph-note">Portrait of Dr. Mae</span>}
+          </div>
+          <figcaption class="hero-card">
+            <span class="hero-card-k">Family-centered</span>
+            <span class="hero-card-v">Prevention first, and a first visit that feels easy.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section approach" aria-labelledby="approach-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Her approach</p>
+            <h2 id="approach-h">Calm visits, <em>confident kids</em></h2>
+          </div>
+        </div>
+        <div class="approach-grid">
+          {promises.map((p) => (
+            <div class="approach-item">
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="wrap about-inner">
+        <div class="about-art">
+          <div class="arch arch-about">
+            {photos.about.src
+              ? <img src={photos.about.src} alt={photos.about.alt} style={`object-position:${photos.about.position}`} width="1000" height="1000" loading="lazy" />
+              : <span class="ph-note">Dr. Mae with a patient</span>}
+          </div>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Meet Dr. Mae</p>
+          <h2>A specialist in <em>little teeth</em></h2>
+          <p class="lede">{bio.intro}</p>
+          <dl class="facts">
+            {bio.facts.map((f) => (
+              <div class="fact">
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="members">Member of {bio.memberships.join(" · ")}</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="usc" aria-labelledby="usc-h">
+      <div class="wrap usc-inner">
+        <div class="usc-copy">
+          <p class="usc-eyebrow">University of Southern California</p>
+          <h2 id="usc-h">A proud <em>Trojan</em>, through and through</h2>
+          <p>{usc.statement}</p>
+        </div>
+        <dl class="usc-list">
+          {usc.items.map((u) => (
+            <div class="usc-item">
+              <dt>{u.label}</dt>
+              <dd>{u.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="section offices" id="offices">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Locations</p>
+            <h2>Where to <em>find her</em></h2>
+          </div>
+        </div>
+        <div class="office-grid">
+          {offices.map((o) => (
+            <article class="office">
+              <p class="office-area">{o.area}</p>
+              <h3>{o.name}</h3>
+              <dl class="office-rows">
+                <div><dt>Address</dt><dd><a href={mapUrl(o)} target="_blank" rel="noopener">{o.street}<br />{o.cityLine}</a></dd></div>
+                <div><dt>Phone</dt><dd><a class="office-phone" href={`tel:${o.phone.replace(/\D/g, "")}`}>{o.phone}</a></dd></div>
+                <div><dt>Hours</dt><dd>{o.hours.map((h) => <span class="line">{h}</span>)}</dd></div>
+                <div><dt>Notes</dt><dd>{o.extras.map((x) => <span class="line">{x}</span>)}</dd></div>
+              </dl>
+              <div class="office-ctas">
+                <a class="btn" href={o.bookUrl} target="_blank" rel="noopener">{o.bookLabel}</a>
+                <a class="text-link" href={mapUrl(o)} target="_blank" rel="noopener">Directions <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <InstagramFeed />
+
+    <section class="section soon">
+      <div class="wrap">
+        <div class="soon-inner">
+          <p class="eyebrow">Coming soon</p>
+          <h2>Brushing, made <em>a little more fun</em></h2>
+          <p>We're creating games and short lessons that help kids build two-minute habits at home.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <Logo size={34} />
+      <p>Dr. Mae sees patients at the two offices above. Please call the office directly to schedule.</p>
+      <p class="footer-meta">© {year} {site.name} · <a href={site.instagram.url} target="_blank" rel="noopener">@{site.instagram.handle}</a></p>
+    </div>
+  </footer>
+
+</Base>

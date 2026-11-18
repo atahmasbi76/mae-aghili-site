@@ -1,0 +1,40 @@
+---
+import { site } from "../data/site";
+const { beholdFeedId, instagram } = site;
+// Live grid comes from Behold (behold.so). The tiles below show only if the widget cannot load.
+const tiles = ["Patient smiles", "Brushing tips", "In the office", "Healthy habits", "Team moments", "First visits"];
+---
+<section class="section ig" id="instagram">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Instagram</p>
+        <h2>Notes from <em>the chair</em></h2>
+      </div>
+      <a class="text-link" href={instagram.url} target="_blank" rel="noopener">Follow @{instagram.handle} <span aria-hidden="true">→</span></a>
+    </div>
+
+    {beholdFeedId && (
+      <div class="ig-live">
+        <behold-widget feed-id={beholdFeedId}></behold-widget>
+        <script is:inline>
+          (() => {
+            if (window.__bhldScript) return; window.__bhldScript = true;
+            const d = document, s = d.createElement("script"); s.type = "module";
+            s.src = "https://w.behold.so/widget.js"; setTimeout(() => { d.head.append(s); }, 0);
+          })();
+        </script>
+      </div>
+    )}
+    {/* Fallback tiles: hidden automatically once the Behold widget loads. */}
+    <ul class="ig-grid ig-fallback">
+      {tiles.map((t, i) => (
+        <li>
+          <a class={`ig-tile ig-tile-${i % 3}`} href={instagram.url} target="_blank" rel="noopener">
+            <span class="ig-tile-label">{t}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
