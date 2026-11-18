@@ -2,7 +2,6 @@
 import Base from "../layouts/Base.astro";
 import Logo from "../components/Logo.astro";
 import InstagramFeed from "../components/InstagramFeed.astro";
-import PalettePicker from "../components/PalettePicker.astro";
 import { site, offices, bio, promises, usc, photos } from "../data/site";
 
 const mapUrl = (o) =>
@@ -170,5 +169,4 @@ const year = new Date().getFullYear();
     </div>
   </footer>
 
-  {site.showPalettePicker && <PalettePicker />}
 </Base>

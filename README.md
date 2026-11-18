@@ -8,7 +8,6 @@ Astro static site. All text, offices and links live in `src/data/site.ts`.
     npm run build    # outputs to dist/
 
 ## Before launch
-- Set `showPalettePicker: false` and pick `defaultPalette` in `src/data/site.ts`.
 - Replace the photo placeholders (hero blob, about photos) with real photos in `public/`.
 
 ## Deploy (Cloudflare Pages)

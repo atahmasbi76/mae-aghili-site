@@ -13,10 +13,6 @@ export const site = {
   // Paste a Behold feed ID here (behold.so, free tier) to show her live Instagram grid.
   // Leave empty to show the link-out tiles instead.
   beholdFeedId: "XlptGIhbVjwfLovOCSN4",
-  // Draft only: shows the color-direction picker in the corner. Set to false before launch.
-  showPalettePicker: true,
-  // "orchid" | "plum" | "rose"
-  defaultPalette: "orchid",
 };
 
 export type Office = {

@@ -2,17 +2,18 @@
    and hairline rules. Deliberately a single light look. */
 :root {
   color-scheme: light;
-  /* Palette: Orchid & Sage (default) */
-  --ink: #2f2233;
-  --ink-2: #66586a;
-  --accent: #8e5a86;
-  --accent-deep: #6f4268;
-  --accent-soft: #f3ebf1;
-  --second: #8ea596;
-  --second-soft: #edf2ee;
-  --bg: #fcfbfc;
+  /* Palette: Berry Pop (berry pink, mint, sunshine) */
+  --ink: #2a1a2e;
+  --ink-2: #5f5263;
+  --accent: #b5179e;
+  --accent-deep: #8f0f7c;
+  --accent-soft: #fbeaf6;
+  --second: #2a9478;
+  --second-soft: #e5f5ef;
+  --sun: #f6c445;
+  --bg: #fdfbfc;
   --surface: #ffffff;
-  --line: #e7e0e6;
+  --line: #eee2ea;
   --on-accent: #ffffff;
 
   --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
@@ -20,29 +21,6 @@
 
   --wrap: 1160px;
 }
-:root[data-palette="plum"] {
-  --ink: #2c1a2b;
-  --ink-2: #67566a;
-  --accent: #6e3a63;
-  --accent-deep: #52284a;
-  --accent-soft: #f2eaf0;
-  --second: #b8955f;
-  --second-soft: #f6f0e6;
-  --bg: #fdfcfb;
-  --line: #e9e1e3;
-}
-:root[data-palette="rose"] {
-  --ink: #26303d;
-  --ink-2: #5c6675;
-  --accent: #a75f71;
-  --accent-deep: #874758;
-  --accent-soft: #f7ecee;
-  --second: #56708c;
-  --second-soft: #ebf0f5;
-  --bg: #fcfcfd;
-  --line: #e4e6ea;
-}
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -206,9 +184,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   padding: clamp(36px, 6vw, 72px); display: flex; flex-direction: column; gap: 6px;
 }
 .soon .eyebrow { color: color-mix(in srgb, var(--bg) 70%, var(--ink)); }
-.soon .eyebrow::before { background: var(--second); }
+.soon .eyebrow::before { background: var(--sun); }
 .soon h2 { color: var(--bg); }
-.soon h2 em { color: var(--second); }
+.soon h2 em { color: #8fe0c6; }
 .soon-inner > p:last-child { margin-top: 12px; color: color-mix(in srgb, var(--bg) 75%, var(--ink)); max-width: 52ch; }
 
 /* Footer */
@@ -216,25 +194,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .footer-inner { display: flex; flex-wrap: wrap; gap: 18px 40px; align-items: center; justify-content: space-between; color: var(--ink-2); font-size: 0.9rem; }
 .footer-inner > p:first-of-type { flex: 1 1 300px; min-width: 0; }
 .footer-meta a { color: var(--ink-2); }
-
-/* Draft palette picker */
-.picker {
-  position: fixed; z-index: 30;
-  left: max(12px, env(safe-area-inset-left, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
-  box-shadow: 0 14px 40px color-mix(in srgb, var(--ink) 14%, transparent); max-width: calc(100vw - 24px);
-}
-.picker-title { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; color: var(--ink-2); }
-.picker-row { display: flex; gap: 8px; overflow-x: auto; }
-.picker-btn {
-  display: flex; gap: 8px; align-items: center; font: inherit; font-size: 0.82rem; font-weight: 500;
-  background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 999px;
-  padding: 6px 12px 6px 8px; cursor: pointer; white-space: nowrap;
-}
-.picker-btn[aria-pressed="true"] { border-color: var(--ink); }
-.swatch { display: flex; }
-.swatch i { width: 14px; height: 14px; border-radius: 50%; margin-left: -4px; border: 2px solid var(--surface); }
-.swatch i:first-child { margin-left: 0; }
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -252,14 +211,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .facts { grid-template-columns: 1fr; }
   .hero-card { position: relative; left: auto; bottom: auto; margin: -48px 16px 0; max-width: none; }
   .office-rows > div { grid-template-columns: 1fr; gap: 4px; }
-  .picker-name { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
   html { scroll-behavior: auto; }
 }
 
-/* USC band: fixed cardinal and gold, independent of the palette picker */
+/* USC band: fixed cardinal and gold, independent of the site palette */
 .usc {
   --cardinal: #7d1a26; --cardinal-deep: #5e121c; --gold: #e2b33c; --cream-on-cardinal: #f8ecdf;
   background:
